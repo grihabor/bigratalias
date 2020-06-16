@@ -24,7 +24,7 @@ func (sw *BigRatAliasWriter) Name() string {
 }
 
 func (sw *BigRatAliasWriter) Imports(t typewriter.Type) (result []typewriter.ImportSpec) {
-	result = append(result, )
+	result = append(result)
 	return result
 }
 
