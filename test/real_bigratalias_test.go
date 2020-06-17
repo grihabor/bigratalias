@@ -145,3 +145,7 @@ func (x *RealDuration) Add(y *RealDuration) *RealDuration {
 func (x *RealDuration) Sub(y *RealDuration) *RealDuration {
 	return NewRealDuration(new(big.Rat).Sub(x.rat, y.rat))
 }
+
+func (x *RealDuration) Rat() *big.Rat {
+	return x.rat
+}

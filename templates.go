@@ -148,4 +148,8 @@ func (x *{{.Name}}Duration) Add(y *{{.Name}}Duration) *{{.Name}}Duration {
 func (x *{{.Name}}Duration) Sub(y *{{.Name}}Duration) *{{.Name}}Duration {
 	return New{{.Name}}Duration(new(big.Rat).Sub(x.rat, y.rat))
 }
+
+func (x *{{.Name}}Duration) Rat() *big.Rat {
+	return x.rat
+}
 `}
