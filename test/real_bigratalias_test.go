@@ -133,3 +133,7 @@ func MinRealDuration(x *RealDuration, y *RealDuration) *RealDuration {
 	}
 	return y
 }
+
+func (d *RealDuration) Abs() *RealDuration {
+	return MaxRealDuration(d, d.Neg())
+}

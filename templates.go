@@ -136,4 +136,8 @@ func Min{{.Name}}Duration(x *{{.Name}}Duration, y *{{.Name}}Duration) *{{.Name}}
 	}
 	return y
 }
+
+func (d *{{.Name}}Duration) Abs() *{{.Name}}Duration {
+	return Max{{.Name}}Duration(d, d.Neg())
+}
 `}
