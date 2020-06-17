@@ -47,10 +47,6 @@ func (x {{.Pointer}}{{.Name}}) Neg() {{.Pointer}}{{.Name}} {
 	return New{{.Name}}(new(big.Rat).Neg(x.rat))
 }
 
-func Unix(t time.Time) {{.Pointer}}{{.Name}} {
-	return New{{.Name}}(big.NewRat(t.UnixNano(), 1e9))
-}
-
 func (x {{.Pointer}}{{.Name}}) Add(y {{.Pointer}}{{.Name}}) {{.Pointer}}{{.Name}} {
 	return New{{.Name}}(new(big.Rat).Add(x.rat, y.rat))
 }

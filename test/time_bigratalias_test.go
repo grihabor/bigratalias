@@ -4,10 +4,7 @@
 
 package test
 
-import (
-	"math/big"
-	"time"
-)
+import "math/big"
 
 // Le returns true if x is less than y
 func (x *Time) Le(y *Time) bool {
@@ -45,10 +42,6 @@ func (x *Time) Mul(y *Time) *Time {
 
 func (x *Time) Neg() *Time {
 	return NewTime(new(big.Rat).Neg(x.rat))
-}
-
-func Unix(t time.Time) *Time {
-	return NewTime(big.NewRat(t.UnixNano(), 1e9))
 }
 
 func (x *Time) Add(y *Time) *Time {
