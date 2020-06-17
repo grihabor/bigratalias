@@ -8,15 +8,17 @@ import (
 )
 
 // +gen * bigratalias
-type Time struct {
+type Real struct {
 	rat *big.Rat
 }
 
-func NewTime(r *big.Rat) *Time {
-	return &Time{rat: r}
+func NewTime(r *big.Rat) *Real {
+	return &Real{rat: r}
 }
 
-func TestTime(t *testing.T) {
-	fr := &Time{rat: big.NewRat(1, 2)}
-	assert.Equal(t, big.NewRat(-1, 2), fr.SubInt64(1).rat)
+func TestRealTime(t *testing.T) {
+	ts := NewRealTime(big.NewRat(10, 1))
+	dt := NewRealDuration(big.NewRat(1, 2))
+	result := ts.Add(dt)
+	assert.True(t, result.Eq(NewRealTime(big.NewRat(21, 2))))
 }

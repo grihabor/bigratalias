@@ -6,71 +6,130 @@ package test
 
 import "math/big"
 
+type TimeTime struct {
+	rat *big.Rat
+}
+
+func NewTimeTime(rat *big.Rat) *TimeTime {
+	return &TimeTime{rat: rat}
+}
+
 // Le returns true if x is less than y
-func (x *Time) Le(y *Time) bool {
+func (x *TimeTime) Le(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) < 0
 }
 
 // Leq returns true if x is less than or equal to y
-func (x *Time) Leq(y *Time) bool {
+func (x *TimeTime) Leq(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) <= 0
 }
 
 // Ge returns true if x is greater than y
-func (x *Time) Ge(y *Time) bool {
+func (x *TimeTime) Ge(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) > 0
 }
 
 // Geq returns true if x is greater than or equal to y
-func (x *Time) Geq(y *Time) bool {
+func (x *TimeTime) Geq(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) >= 0
 }
 
 // Eq returns true if x is equal to y
-func (x *Time) Eq(y *Time) bool {
+func (x *TimeTime) Eq(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) == 0
 }
 
 // Neq returns true if x is not equal to y
-func (x *Time) Neq(y *Time) bool {
+func (x *TimeTime) Neq(y *TimeTime) bool {
 	return x.rat.Cmp(y.rat) != 0
 }
 
-func (x *Time) Mul(y *Time) *Time {
-	return NewTime(new(big.Rat).Mul(x.rat, y.rat))
+func (x *TimeTime) Add(y *TimeDuration) *TimeTime {
+	return NewTimeTime(new(big.Rat).Add(x.rat, y.rat))
 }
 
-func (x *Time) Neg() *Time {
-	return NewTime(new(big.Rat).Neg(x.rat))
+func (x *TimeTime) Sub(y *TimeTime) *TimeDuration {
+	return NewTimeDuration(new(big.Rat).Sub(x.rat, y.rat))
 }
 
-func (x *Time) Add(y *Time) *Time {
-	return NewTime(new(big.Rat).Add(x.rat, y.rat))
-}
-
-func (x *Time) Sub(y *Time) *Time {
-	return NewTime(new(big.Rat).Sub(x.rat, y.rat))
-}
-
-func (x *Time) Div(y *Time) *Time {
-	return x.Mul(y.Inv())
-}
-
-func (x *Time) AddInt64(y int64) *Time {
-	return x.Add(NewTime(big.NewRat(y, 1)))
-}
-
-func (x *Time) SubInt64(y int64) *Time {
-	return x.Sub(NewTime(big.NewRat(y, 1)))
-}
-
-func (x *Time) Max(y *Time) *Time {
+func MaxTimeTime(x *TimeTime, y *TimeTime) *TimeTime {
 	if x.Ge(y) {
 		return x
 	}
 	return y
 }
 
-func (x *Time) Inv() *Time {
-	return NewTime(new(big.Rat).Inv(x.rat))
+func MinTimeTime(x *TimeTime, y *TimeTime) *TimeTime {
+	if x.Le(y) {
+		return x
+	}
+	return y
+}
+
+func (x *TimeTime) Inv() *TimeTime {
+	return NewTimeTime(new(big.Rat).Inv(x.rat))
+}
+
+type TimeDuration struct {
+	rat *big.Rat
+}
+
+func NewTimeDuration(rat *big.Rat) *TimeDuration {
+	return &TimeDuration{rat: rat}
+}
+
+func (x *TimeDuration) Mul(y *TimeDuration) *TimeDuration {
+	return NewTimeDuration(new(big.Rat).Mul(x.rat, y.rat))
+}
+
+// Le returns true if x is less than y
+func (x *TimeDuration) Le(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) < 0
+}
+
+// Leq returns true if x is less than or equal to y
+func (x *TimeDuration) Leq(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) <= 0
+}
+
+// Ge returns true if x is greater than y
+func (x *TimeDuration) Ge(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) > 0
+}
+
+// Geq returns true if x is greater than or equal to y
+func (x *TimeDuration) Geq(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) >= 0
+}
+
+// Eq returns true if x is equal to y
+func (x *TimeDuration) Eq(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) == 0
+}
+
+// Neq returns true if x is not equal to y
+func (x *TimeDuration) Neq(y *TimeDuration) bool {
+	return x.rat.Cmp(y.rat) != 0
+}
+
+func (x *TimeDuration) Neg() *TimeDuration {
+	return NewTimeDuration(new(big.Rat).Neg(x.rat))
+}
+
+func (x *TimeDuration) Div(y *big.Rat) *TimeDuration {
+	return NewTimeDuration(new(big.Rat).Mul(x.rat, new(big.Rat).Inv(y)))
+}
+
+func MaxTimeDuration(x *TimeDuration, y *TimeDuration) *TimeDuration {
+	if x.Ge(y) {
+		return x
+	}
+	return y
+}
+
+func MinTimeDuration(x *TimeDuration, y *TimeDuration) *TimeDuration {
+	if x.Le(y) {
+		return x
+	}
+	return y
 }
