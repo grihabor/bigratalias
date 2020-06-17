@@ -81,8 +81,8 @@ func New{{.Name}}Duration(rat *big.Rat) *{{.Name}}Duration {
 	return &{{.Name}}Duration{rat: rat}
 }
 
-func (x *{{.Name}}Duration) Mul(y *{{.Name}}Duration) *{{.Name}}Duration {
-	return New{{.Name}}Duration(new(big.Rat).Mul(x.rat, y.rat))
+func (x *{{.Name}}Duration) Mul(y *big.Rat) *{{.Name}}Duration {
+	return New{{.Name}}Duration(new(big.Rat).Mul(x.rat, y))
 }
 
 // Le returns true if x is less than y

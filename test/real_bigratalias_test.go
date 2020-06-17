@@ -78,8 +78,8 @@ func NewRealDuration(rat *big.Rat) *RealDuration {
 	return &RealDuration{rat: rat}
 }
 
-func (x *RealDuration) Mul(y *RealDuration) *RealDuration {
-	return NewRealDuration(new(big.Rat).Mul(x.rat, y.rat))
+func (x *RealDuration) Mul(y *big.Rat) *RealDuration {
+	return NewRealDuration(new(big.Rat).Mul(x.rat, y))
 }
 
 // Le returns true if x is less than y
