@@ -70,6 +70,10 @@ func (x *RealTime) Inv() *RealTime {
 	return NewRealTime(new(big.Rat).Inv(x.rat))
 }
 
+func (x *RealTime) Rat() *big.Rat {
+	return x.rat
+}
+
 type RealDuration struct {
 	rat *big.Rat
 }
