@@ -153,3 +153,11 @@ func (x *RealDuration) Sub(y *RealDuration) *RealDuration {
 func (x *RealDuration) Rat() *big.Rat {
 	return x.rat
 }
+
+func (x *RealDuration) Positive() bool {
+	return x.Ge(NewRealDuration(new(big.Rat)))
+}
+
+func (x *RealDuration) Negative() bool {
+	return x.Le(NewRealDuration(new(big.Rat)))
+}
