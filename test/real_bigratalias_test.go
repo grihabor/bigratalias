@@ -71,6 +71,9 @@ func (x *RealTime) Inv() *RealTime {
 }
 
 func (x *RealTime) Rat() *big.Rat {
+	if x == nil {
+		return nil
+	}
 	return x.rat
 }
 
@@ -151,6 +154,9 @@ func (x *RealDuration) Sub(y *RealDuration) *RealDuration {
 }
 
 func (x *RealDuration) Rat() *big.Rat {
+	if x == nil {
+		return nil
+	}
 	return x.rat
 }
 

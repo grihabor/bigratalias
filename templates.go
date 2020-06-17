@@ -73,6 +73,13 @@ func (x *{{.Name}}Time) Inv() *{{.Name}}Time {
 	return New{{.Name}}Time(new(big.Rat).Inv(x.rat))
 }
 
+func (x *{{.Name}}Time) Rat() *big.Rat {
+	if x == nil {
+		return nil
+	}
+	return x.rat
+}
+
 type {{.Name}}Duration struct {
 	rat *big.Rat
 }
@@ -150,6 +157,17 @@ func (x *{{.Name}}Duration) Sub(y *{{.Name}}Duration) *{{.Name}}Duration {
 }
 
 func (x *{{.Name}}Duration) Rat() *big.Rat {
+	if x == nil {
+		return nil
+	}
 	return x.rat
+}
+
+func (x *{{.Name}}Duration) Positive() bool {
+	return x.Ge(New{{.Name}}Duration(new(big.Rat)))
+}
+
+func (x *{{.Name}}Duration) Negative() bool {
+	return x.Le(New{{.Name}}Duration(new(big.Rat)))
 }
 `}
