@@ -22,3 +22,8 @@ func TestRealTime(t *testing.T) {
 	result := ts.Add(dt)
 	assert.True(t, result.Eq(NewRealTime(big.NewRat(21, 2))))
 }
+
+func TestDurationAdd(t *testing.T) {
+	dt := NewRealDuration(big.NewRat(1, 3))
+	assert.True(t, dt.Add(dt).Eq(NewRealDuration(big.NewRat(2, 3))))
+}

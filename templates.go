@@ -137,7 +137,15 @@ func Min{{.Name}}Duration(x *{{.Name}}Duration, y *{{.Name}}Duration) *{{.Name}}
 	return y
 }
 
-func (d *{{.Name}}Duration) Abs() *{{.Name}}Duration {
-	return Max{{.Name}}Duration(d, d.Neg())
+func (x *{{.Name}}Duration) Abs() *{{.Name}}Duration {
+	return Max{{.Name}}Duration(x, x.Neg())
+}
+
+func (x *{{.Name}}Duration) Add(y *{{.Name}}Duration) *{{.Name}}Duration {
+	return New{{.Name}}Duration(new(big.Rat).Add(x.rat, y.rat))
+}
+
+func (x *{{.Name}}Duration) Sub(y *{{.Name}}Duration) *{{.Name}}Duration {
+	return New{{.Name}}Duration(new(big.Rat).Sub(x.rat, y.rat))
 }
 `}

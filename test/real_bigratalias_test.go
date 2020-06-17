@@ -134,6 +134,14 @@ func MinRealDuration(x *RealDuration, y *RealDuration) *RealDuration {
 	return y
 }
 
-func (d *RealDuration) Abs() *RealDuration {
-	return MaxRealDuration(d, d.Neg())
+func (x *RealDuration) Abs() *RealDuration {
+	return MaxRealDuration(x, x.Neg())
+}
+
+func (x *RealDuration) Add(y *RealDuration) *RealDuration {
+	return NewRealDuration(new(big.Rat).Add(x.rat, y.rat))
+}
+
+func (x *RealDuration) Sub(y *RealDuration) *RealDuration {
+	return NewRealDuration(new(big.Rat).Sub(x.rat, y.rat))
 }
